@@ -1,0 +1,57 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+	ofstream outfile("101.txt",ios::app);
+	ifstream infile("101.txt", ios::in);
+	int n = 0;
+	cout << "请输入你要求最大值的个数" << endl;
+	cin >> n;
+	int* a = new int[n]();
+	int i =0;
+	cout << "请输入相应整数" << endl;
+	for (i = 0; i < n; i++)
+	{
+		cin >> a[i];
+		outfile <<a[i]<<" " ;
+	}
+	
+	int max = a[0];
+	for (i = 0; i < n; i++)
+	{
+		if (a[i] > max) 
+		{
+			max = a[i];
+		}
+		
+	}
+	cout <<"max="<< max << endl;
+	/*保存*/
+
+	if(outfile)
+	{
+		cout << "打开文件成功" << endl;
+	}
+	else
+	{
+		cout << "打开文件失败" << endl;
+	}
+
+	
+	outfile << max << endl;
+	/*提出*/
+	
+	cout<< "从文件中提取出数据为：" << endl;
+	for (i = 0; i < n; i++)
+	{
+		infile >> a[i];
+		cout<< a[i] << " ";
+	}
+	cout << endl;
+	infile >> max;
+	cout << "max=" << max;
+	outfile.close();
+	infile.close();
+	return 0;
+}
