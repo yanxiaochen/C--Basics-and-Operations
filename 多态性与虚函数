@@ -1,0 +1,88 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class Info
+{
+public:
+	virtual void Show() = 0;
+};
+
+class Person : public Info
+{
+public:
+	Person(string name);
+	virtual void Show();
+private:
+	string name;
+};
+
+class UnderGraduated : public Info
+{
+public:
+	 void Show();
+	UnderGraduated( int cpp, int java);
+
+
+private:
+	int cpp;
+	int java;
+};
+
+class Graduated : public Info
+{
+public:
+	 void Show();
+	Graduated( string project, string hasPaper);
+
+
+private:
+	string project;
+	string hasPaper;
+};
+
+
+
+
+Person::Person(string name) :name(name)
+{
+
+}
+void Person::Show()
+{
+	cout << "姓名:" << name << endl;
+}
+UnderGraduated::UnderGraduated( int cpp, int java) : cpp(cpp), java(java)
+{
+
+}
+void UnderGraduated::Show()
+{
+	cout << "C++的成绩为：" << cpp << endl << "Java的成绩为:" << java << endl;
+}
+Graduated::Graduated( string project, string hasPaper) : project(project), hasPaper(hasPaper)
+{
+
+}
+void Graduated::Show()
+{
+
+	cout << "研究生参与的项目是：" << project << endl;
+	cout << "研究生是否发表论文：" << hasPaper << endl;
+}
+
+
+
+#include"xiaochen1.h"
+int main()
+{
+	Info* p1 = new Person("小李");
+	Info* p2 = new UnderGraduated(85, 86);
+	Info* p3 = new Graduated("人类进化论", "是");
+	p1->Show();
+	p2->Show();
+	p3->Show();
+	delete p1;
+	delete p2;
+	delete p3;
+	return 0;
+}
