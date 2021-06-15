@@ -1,0 +1,108 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+struct Book
+{
+	char bookName[20];
+	char press[20];
+	double price;
+};
+int main()
+{ 
+	//实现开始打印功能
+	int y,a;
+	cout << "txt文档中存在的数据有:" << endl;
+	fstream fs("books.txt", ios::binary | ios::in | ios::out);
+	fs.seekg(0, ios::end);
+	streampos sp1 = fs.tellg();
+	fs.seekp(0, ios::beg);
+	streampos sp2 = fs.tellp();
+	cout << (sp1 - sp2) / sizeof(Book) <<"个"<<endl;
+	y = (sp1 - sp2) / sizeof(Book);
+	if (y == 0)
+	{
+		cout << "txt中没有数据" << endl;
+	}
+		Book * pc = new Book[y];
+		for (a = 0; a < y; a++)
+		{
+			fs.read((char*)&pc[a], sizeof(pc[a]));
+			cout << "第" << a + 1 << "本书的信息为:" << endl;
+			cout << "书名为:" << pc[a].bookName << endl;
+			cout << "出版社为:" << pc[a].press << endl;
+			cout << "价格为:" << pc[a].price << endl;
+		}
+	fs.close();
+	cout << endl;
+//实现输入到txt中
+	size_t num;
+	int i;
+	cout << "请输入你要输入数据的个数：" << endl;
+	cin >> num;
+	Book* pb = new Book[num]();
+	cout << "请分别输入书名、出版社、价格" << endl;
+
+	for (i = 0; i < num; i++)
+	{
+		cin >> pb[i].bookName >> pb[i].press >> pb[i].price;
+	}
+	/*把数据写入txt文档*/
+	cout << endl;
+	fstream chen("books.txt", ios::binary | ios::in | ios::out);
+	if (!chen)
+	{
+		cout << "打开文件失败" << endl;
+	}
+	for (i = 0; i < num; i++)
+	{
+		chen.write((char*)&pb[i], sizeof(pb[i]));
+	}
+	chen.close();
+	/*将txt文档输入显示器*/
+	if (!chen)
+	{
+		cout << "打开文件失败" << endl;
+	}
+	for (i = 0; i < num; i++)
+	{
+		chen.read((char*)&pb[i], sizeof(pb[i]));
+		cout << "第" << i + 1 << "本书的信息为:" << endl;
+		cout << "书名为:" << pb[i].bookName << endl;
+		cout << "出版社为:" << pb[i].press << endl;
+		cout << "价格为:" << pb[i].price << endl;
+	}
+	chen.close();
+	cout << endl;
+	/*实现再次修改内容*/
+	int x = 0;
+	cout << "请问是否要重新写入新的数据(1是，2不是)" << endl;
+	cin >> x;
+	
+	if (x == 1) {
+		fstream cof("books.txt", ios::trunc | ios::out | ios::binary);
+		cout << "请输入你要输入数据的个数：" << endl;
+		cin >> num;
+
+		Book* pd = new Book[num]();
+		cout << "请分别输入书名、出版社、价格" << endl;
+
+		for (i = 0; i < num; i++)
+		{
+			cin >> pd[i].bookName >> pd[i].press >> pd[i].price;
+		}
+		if (!cof)
+		{
+			cout << "打开文件失败" << endl;
+		}
+		for (i = 0; i < num; i++)
+		{
+			cof.write((char*)&pd[i], sizeof(pd[i]));
+		}
+		cof.close();
+	}
+	if (x == 2) {
+		cout << "谢谢使用(0v0)!" << endl;
+		exit(0);	
+	}
+	return 0;
+}
