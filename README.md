@@ -1,6 +1,9 @@
 # C++  Basics-and-Operations
 c++的基础知识和习题
 （大部分的代码采用外链式写法）
+
+
+
 题目：
 1、构造一个类CalculateFun，公有部分包含构造、析构函数、外部接口函数void AllByOne()、和静态成员函数static void ShowSequence()。私有部分包含：void InsideCalculation()、void SetData()、int x、int y和静态成员变量static int snCount。
 
