@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+#define PI 3.14
+double area(double r)
+{
+	return PI * r * r;
+}
+double area(double a, double h)
+{
+	return a * h / 2;
+}
+double area(double x, double y, double c)
+{
+	return (x + y) * c / 2;
+}
+int main()
+{
+	double r, a, h;
+	int x, y, c;
+	double v1, v2;
+	int v3;
+	cout << "请依次输入半径、底边长、高1、上底、下底、高2" << endl;
+	cin >> r >> a >> h >> x >> y >> c;
+	cout << "结果为:" << endl;
+	v1 = area(r);
+	cout << "园的面积=" << v1<< endl;
+	v2 = area(a, h);
+	cout << "三角形的面积=" << v2 << endl;
+	v3 = area(x, y, c);
+	cout << "梯形的面积=" << v3 << endl;
+	return 0;
+
+}
