@@ -1,5 +1,5 @@
 # C--Basics-and-Operations
-c++
+本题采用外链式写法
 
 
 
